@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interoperability with Atomic Simulation Environment &mdash; quippy 8e99b0a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Molecular Dynamics Simulation of Fracture in Quartz" href="adglass.html" />
+    <link rel="prev" title="Motivation" href="CCP5-June-2021.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            quippy
+              <img src="../_static/hybrid.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                8e99b0a
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation of QUIP and quippy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">QUIP Overview Tutorials</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Interoperability with Atomic Simulation Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-vacancy-formation-energy">Example: vacancy formation energy</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="adglass.html">Molecular Dynamics Simulation of Fracture in Quartz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adaptive-qmmm.html">Adaptive QM/MM MD of Fracture in Silicon</a></li>
+<li class="toctree-l2"><a class="reference internal" href="committee_modelling.html">Committee Modelling using GAP potentials</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../quippy.html">Quippy library reference</a></li>
+</ul>
+
+    <p></p>
+    <ul>
+        <li><a href="../genindex.html">Index</a></li>
+        <li><a href="../py-modindex.html">Module Index</a></li>
+        <li><a href="../search.html">Search Page</a></li>
+        <li><a href="../_modules/index.html">Module Source Code</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">quippy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Interoperability with Atomic Simulation Environment</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/quippy-ase-interoperability.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="interoperability-with-atomic-simulation-environment">
+<h1>Interoperability with Atomic Simulation Environment<a class="headerlink" href="#interoperability-with-atomic-simulation-environment" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p>quippy uses the standard <code class="docutils literal notranslate"><span class="pre">ase.atoms.Atoms</span></code> class to represent
+Atomic structures</p></li>
+<li><p>quippy <code class="docutils literal notranslate"><span class="pre">Potential</span></code> objects can be used as ASE calculators, and
+vice-versa</p></li>
+<li><p>Can use standard ASE tools, plus communicate with other packages
+using ASE as <em>lingua franca</em></p></li>
+</ul>
+<section id="example-vacancy-formation-energy">
+<h2>Example: vacancy formation energy<a class="headerlink" href="#example-vacancy-formation-energy" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Generate structure with <code class="docutils literal notranslate"><span class="pre">ASE</span></code> lattice tools</p></li>
+<li><p>Stillinger-Weber potential implementation from <code class="docutils literal notranslate"><span class="pre">QUIP</span></code></p></li>
+<li><p>Elastic constant fitting routine from <code class="docutils literal notranslate"><span class="pre">matscipy</span></code>, internal
+relaxations with <code class="docutils literal notranslate"><span class="pre">ASE</span></code> FIRE minimiser</p></li>
+</ul>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">bulk</span>
+<span class="kn">from</span> <span class="nn">ase.optimize</span> <span class="kn">import</span> <span class="n">BFGS</span>
+<span class="kn">from</span> <span class="nn">ase.optimize.precon</span> <span class="kn">import</span> <span class="n">PreconLBFGS</span>
+<span class="kn">from</span> <span class="nn">quippy.potential</span> <span class="kn">import</span> <span class="n">Potential</span>
+
+<span class="n">si</span> <span class="o">=</span> <span class="n">bulk</span><span class="p">(</span><span class="s1">&#39;Si&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">5.44</span><span class="p">,</span> <span class="n">cubic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sw_pot</span> <span class="o">=</span> <span class="n">Potential</span><span class="p">(</span><span class="s1">&#39;IP SW&#39;</span><span class="p">,</span>
+                   <span class="n">param_filename</span><span class="o">=</span><span class="s1">&#39;../../share/Parameters/ip.parms.SW.xml&#39;</span><span class="p">)</span>
+<span class="n">si</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">sw_pot</span><span class="p">)</span>
+<span class="n">e_bulk_per_atom</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">si</span><span class="p">)</span>
+
+<span class="c1"># call general purpose elastic constants calculator</span>
+<span class="c1">#   using ASE Atoms and QUIP Potential</span>
+<span class="kn">from</span> <span class="nn">matscipy.elasticity</span> <span class="kn">import</span> <span class="n">fit_elastic_constants</span>
+<span class="n">Cij</span> <span class="o">=</span> <span class="n">fit_elastic_constants</span><span class="p">(</span><span class="n">si</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">BFGS</span><span class="p">,</span>
+                            <span class="n">symmetry</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">vac1</span> <span class="o">=</span> <span class="n">si</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">vac1</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">half_cell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">vac1</span><span class="o">.</span><span class="n">cell</span><span class="p">)</span><span class="o">/</span><span class="mf">2.</span>
+<span class="n">vac_atom</span> <span class="o">=</span> <span class="p">((</span><span class="n">vac1</span><span class="o">.</span><span class="n">positions</span> <span class="o">-</span> <span class="n">half_cell</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+<span class="k">del</span> <span class="n">vac1</span><span class="p">[</span><span class="n">vac_atom</span><span class="p">]</span>
+
+<span class="n">vac1</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">sw_pot</span><span class="p">)</span>
+<span class="n">vac1</span><span class="o">.</span><span class="n">rattle</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">PreconLBFGS</span><span class="p">(</span><span class="n">vac1</span><span class="p">)</span> <span class="c1"># big cell, use preconditioned minimiser</span>
+<span class="n">opt</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">fmax</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="n">e_vac</span> <span class="o">=</span> <span class="n">vac1</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">()</span> <span class="o">-</span> <span class="n">e_bulk_per_atom</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">vac1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SW vacancy formation energy&#39;</span><span class="p">,</span> <span class="n">e_vac</span><span class="p">,</span> <span class="s1">&#39;eV&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Populating</span> <span class="n">the</span> <span class="n">interactive</span> <span class="n">namespace</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="ow">and</span> <span class="n">matplotlib</span>
+      <span class="n">Step</span>     <span class="n">Time</span>          <span class="n">Energy</span>         <span class="n">fmax</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">0</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.635777</span>        <span class="mf">0.3247</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">1</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.644590</span>        <span class="mf">0.1504</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">2</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.646997</span>        <span class="mf">0.0001</span>
+      <span class="n">Step</span>     <span class="n">Time</span>          <span class="n">Energy</span>         <span class="n">fmax</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">0</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.670667</span>        <span class="mf">0.1584</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">1</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.672777</span>        <span class="mf">0.0749</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">2</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.673385</span>        <span class="mf">0.0000</span>
+      <span class="n">Step</span>     <span class="n">Time</span>          <span class="n">Energy</span>         <span class="n">fmax</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">0</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.678737</span>        <span class="mf">0.0000</span>
+      <span class="n">Step</span>     <span class="n">Time</span>          <span class="n">Energy</span>         <span class="n">fmax</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">0</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.660845</span>        <span class="mf">0.1508</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">1</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.662784</span>        <span class="mf">0.0742</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">2</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.663403</span>        <span class="mf">0.0000</span>
+      <span class="n">Step</span>     <span class="n">Time</span>          <span class="n">Energy</span>         <span class="n">fmax</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">0</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.617822</span>        <span class="mf">0.2945</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">1</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.625262</span>        <span class="mf">0.1477</span>
+<span class="n">BFGS</span><span class="p">:</span>    <span class="mi">2</span> <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>      <span class="o">-</span><span class="mf">34.627763</span>        <span class="mf">0.0001</span>
+<span class="n">Fitting</span> <span class="n">C_11</span>
+<span class="n">Strain</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.</span>  <span class="p">,</span>  <span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.02</span><span class="p">])</span>
+<span class="n">Stress</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.56044687</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.01247671</span><span class="p">,</span>  <span class="mf">0.5027424</span> <span class="p">,</span>  <span class="mf">1.98366491</span><span class="p">,</span>  <span class="mf">3.42893711</span><span class="p">])</span> <span class="n">GPa</span>
+<span class="n">Cij</span> <span class="p">(</span><span class="n">gradient</span><span class="p">)</span> <span class="o">/</span> <span class="n">GPa</span>    <span class="p">:</span>     <span class="mf">149.74909575669915</span>
+<span class="n">Error</span> <span class="ow">in</span> <span class="n">Cij</span> <span class="o">/</span> <span class="n">GPa</span>      <span class="p">:</span>     <span class="mf">1.1696996170085603</span>
+<span class="n">Correlation</span> <span class="n">coefficient</span> <span class="p">:</span>     <span class="mf">0.9999084935045536</span>
+<span class="n">Setting</span> <span class="n">C11</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">to</span> <span class="mf">0.934660</span> <span class="o">+/-</span> <span class="mf">0.007301</span>
+
+
+<span class="n">Fitting</span> <span class="n">C_21</span>
+<span class="n">Strain</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.</span>  <span class="p">,</span>  <span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.02</span><span class="p">])</span>
+<span class="n">Stress</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.07663577</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.26643655</span><span class="p">,</span>  <span class="mf">0.5027424</span> <span class="p">,</span>  <span class="mf">1.23345414</span><span class="p">,</span>  <span class="mf">1.92818198</span><span class="p">])</span> <span class="n">GPa</span>
+<span class="n">Cij</span> <span class="p">(</span><span class="n">gradient</span><span class="p">)</span> <span class="o">/</span> <span class="n">GPa</span>    <span class="p">:</span>     <span class="mf">75.0952617697293</span>
+<span class="n">Error</span> <span class="ow">in</span> <span class="n">Cij</span> <span class="o">/</span> <span class="n">GPa</span>      <span class="p">:</span>     <span class="mf">1.3149075235415504</span>
+<span class="n">Correlation</span> <span class="n">coefficient</span> <span class="p">:</span>     <span class="mf">0.9995404242109733</span>
+<span class="n">Setting</span> <span class="n">C21</span> <span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="n">to</span> <span class="mf">0.468708</span> <span class="o">+/-</span> <span class="mf">0.008207</span>
+
+
+<span class="n">Fitting</span> <span class="n">C_31</span>
+<span class="n">Strain</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.</span>  <span class="p">,</span>  <span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.02</span><span class="p">])</span>
+<span class="n">Stress</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.07663577</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.26643655</span><span class="p">,</span>  <span class="mf">0.5027424</span> <span class="p">,</span>  <span class="mf">1.23345414</span><span class="p">,</span>  <span class="mf">1.92818198</span><span class="p">])</span> <span class="n">GPa</span>
+<span class="n">Cij</span> <span class="p">(</span><span class="n">gradient</span><span class="p">)</span> <span class="o">/</span> <span class="n">GPa</span>    <span class="p">:</span>     <span class="mf">75.09526176972929</span>
+<span class="n">Error</span> <span class="ow">in</span> <span class="n">Cij</span> <span class="o">/</span> <span class="n">GPa</span>      <span class="p">:</span>     <span class="mf">1.31490752354155</span>
+<span class="n">Correlation</span> <span class="n">coefficient</span> <span class="p">:</span>     <span class="mf">0.9995404242109733</span>
+<span class="n">Updating</span> <span class="n">C31</span> <span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="k">with</span> <span class="n">value</span> <span class="mf">0.468708</span> <span class="o">+/-</span> <span class="mf">0.008207</span>
+
+
+<span class="n">Fitting</span> <span class="n">C_44</span>
+<span class="n">Strain</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.</span>  <span class="p">,</span>  <span class="mf">0.01</span><span class="p">,</span>  <span class="mf">0.02</span><span class="p">])</span>
+<span class="n">Stress</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.13572340e+00</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.65842409e-01</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.46072689e-15</span><span class="p">,</span>  <span class="mf">5.60142655e-01</span><span class="p">,</span>
+        <span class="mf">1.11304586e+00</span><span class="p">])</span> <span class="n">GPa</span>
+<span class="n">Cij</span> <span class="p">(</span><span class="n">gradient</span><span class="p">)</span> <span class="o">/</span> <span class="n">GPa</span>    <span class="p">:</span>     <span class="mf">56.23523568430933</span>
+<span class="n">Error</span> <span class="ow">in</span> <span class="n">Cij</span> <span class="o">/</span> <span class="n">GPa</span>      <span class="p">:</span>     <span class="mf">0.19437884854805132</span>
+<span class="n">Correlation</span> <span class="n">coefficient</span> <span class="p">:</span>     <span class="mf">0.9999820790695022</span>
+<span class="n">Setting</span> <span class="n">C44</span> <span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="n">to</span> <span class="mf">0.350993</span> <span class="o">+/-</span> <span class="mf">0.001213</span>
+
+
+<span class="p">[[</span><span class="n">b</span> <span class="n">C11</span> <span class="n">b</span> <span class="n">C12</span> <span class="n">b</span> <span class="n">C12</span> <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>    <span class="p">]</span>
+ <span class="p">[</span><span class="n">b</span> <span class="n">C12</span> <span class="n">b</span> <span class="n">C11</span> <span class="n">b</span> <span class="n">C12</span> <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>    <span class="p">]</span>
+ <span class="p">[</span><span class="n">b</span> <span class="n">C12</span> <span class="n">b</span> <span class="n">C12</span> <span class="n">b</span> <span class="n">C11</span> <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>    <span class="p">]</span>
+ <span class="p">[</span><span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span> <span class="n">C44</span> <span class="n">b</span>     <span class="n">b</span>    <span class="p">]</span>
+ <span class="p">[</span><span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span> <span class="n">C44</span> <span class="n">b</span>    <span class="p">]</span>
+ <span class="p">[</span><span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span>     <span class="n">b</span> <span class="n">C44</span><span class="p">]]</span>
+
+ <span class="o">=</span>
+
+<span class="p">[[</span><span class="mf">149.75</span>  <span class="mf">75.1</span>   <span class="mf">75.1</span>    <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>  <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">75.1</span>  <span class="mf">149.75</span>  <span class="mf">75.1</span>    <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>  <span class="p">]</span>
+ <span class="p">[</span> <span class="mf">75.1</span>   <span class="mf">75.1</span>  <span class="mf">149.75</span>   <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>  <span class="p">]</span>
+ <span class="p">[</span>  <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>    <span class="mf">56.24</span>   <span class="mf">0.</span>     <span class="mf">0.</span>  <span class="p">]</span>
+ <span class="p">[</span>  <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>    <span class="mf">56.24</span>   <span class="mf">0.</span>  <span class="p">]</span>
+ <span class="p">[</span>  <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>     <span class="mf">0.</span>    <span class="mf">56.24</span><span class="p">]]</span>
+<span class="n">C_11</span> <span class="o">=</span> <span class="mf">149.75</span> <span class="o">+/-</span> <span class="mf">1.17</span> <span class="n">GPa</span>
+<span class="n">C_12</span> <span class="o">=</span> <span class="mf">75.10</span> <span class="o">+/-</span> <span class="mf">1.31</span> <span class="n">GPa</span>
+<span class="n">C_44</span> <span class="o">=</span> <span class="mf">56.24</span> <span class="o">+/-</span> <span class="mf">0.19</span> <span class="n">GPa</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">0</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>     <span class="o">-</span><span class="mf">927.087471</span>       <span class="mf">0.8332</span>
+<span class="n">estimate_mu</span><span class="p">():</span> <span class="n">mu</span><span class="o">=</span><span class="mf">2.3315998829549316</span><span class="p">,</span> <span class="n">mu_c</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">1</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">10</span>     <span class="o">-</span><span class="mf">927.611735</span>       <span class="mf">0.1487</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">2</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.643943</span>       <span class="mf">0.0642</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">3</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.652380</span>       <span class="mf">0.0393</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">4</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.655827</span>       <span class="mf">0.0210</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">5</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.656988</span>       <span class="mf">0.0092</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">6</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657131</span>       <span class="mf">0.0052</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">7</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657193</span>       <span class="mf">0.0030</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">8</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657220</span>       <span class="mf">0.0011</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>   <span class="mi">9</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657224</span>       <span class="mf">0.0009</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">10</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0004</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">11</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0002</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">12</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0001</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">13</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0001</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">14</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">15</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">16</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">17</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">11</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">18</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">12</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">19</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">12</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">20</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">12</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">PreconLBFGS</span><span class="p">:</span>  <span class="mi">21</span>  <span class="mi">21</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mi">12</span>     <span class="o">-</span><span class="mf">927.657226</span>       <span class="mf">0.0000</span>
+<span class="n">SW</span> <span class="n">vacancy</span> <span class="n">formation</span> <span class="n">energy</span> <span class="mf">4.33384020178346</span> <span class="n">eV</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CCP5-June-2021.html" class="btn btn-neutral float-left" title="Motivation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="adglass.html" class="btn btn-neutral float-right" title="Molecular Dynamics Simulation of Fracture in Quartz" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2008-2021, James Kermode.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
